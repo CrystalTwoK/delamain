@@ -3,17 +3,15 @@
 .d888b88 .d8888b. 88 .d8888b. 88d8b.d8b. .d8888b. dP 88d888b. 
 88'  `88 88ooood8 88 88'  `88 88'`88'`88 88'  `88 88 88'  `88 
 88.  .88 88.  ... 88 88.  .88 88  88  88 88.  .88 88 88    88 
-`88888P8 `88888P' dP `88888P8 dP  dP  dP `88888P8 dP dP    dP 
+  `88888P8 `88888P' dP `88888P8 dP  dP  dP `88888P8 dP dP    dP 
 
 Author: Andrea Marucci
 */
-
-const MongoClient = require("mongodb").MongoClient;
-
 require("dotenv").config();
 require("colors");
-const fs = require("fs");
+const MongoClient = require("mongodb").MongoClient;
 const Discord = require("discord.js");
+
 global.client = new Discord.Client({
   intents: [
     "GUILDS",
@@ -41,20 +39,21 @@ global.log = {
 };
 client.login(token);
 
-client.on("ready", () => {
+client.on("ready", async () => {
+  const { ready } = require("./startup");
   const reset = false;
   console.clear();
-  console.log(log.system + "online");
+  await ready();
   if (!reset) {
     const { commandsInit } = require("./handlers/commandsInit");
-    commandsInit();
+    await commandsInit();
     MongoClient.connect(db, (err, db) => {
-      if (err) console.log(log.error + "[main.js/client.on('ready')]" + err);
+      if (err) console.log(prefix.log + err);
       console.log(log.db + "Database Connection Enstablished");
     });
   } else {
     const { reset } = require("./handlers/reset");
-    reset();
+    await reset();
   }
 });
 

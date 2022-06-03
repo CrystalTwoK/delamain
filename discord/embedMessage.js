@@ -38,11 +38,10 @@ module.exports = {
               .setEmoji(result.buttonemoji)
               .setStyle("SECONDARY")
           );
-
           interaction.channel.send({ embeds: [embed], components: [button] });
         });
     } catch (e) {
-      console.log(log.error + "[embedMessage/embedMessage()] " + e);
+      console.log(log.error + "[embedMessage/faction()] " + e);
     }
   },
   async reply(interaction, color, title, description) {
@@ -55,7 +54,6 @@ module.exports = {
         .setFooter({
           text: `© 2022 - Delamain - System`,
         });
-
       interaction.reply({ embeds: [embed], ephemeral: true });
     } catch (e) {
       console.log(log.error + "[embedMessage/reply()] " + e);

@@ -16,7 +16,7 @@ module.exports = {
       fazioni.deleteOne(query, (e, obj) => {
         if (e)
           console.log(
-            log.error + "[deletefaction.js.execute().fazioni.deleteOne()] " + e
+            log.error + "[deletefaction.js/execute()/fazioni/deleteOne()] " + e
           );
 
         updateFactionCommands();

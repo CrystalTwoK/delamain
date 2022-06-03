@@ -11,7 +11,6 @@ const updateFactionCommands = async () => {
     const fazioni = database.collection("db_fazioni");
     global.choicesArray = [];
     global.commands = [];
-    console.log(choicesArray);
 
     await fazioni
       .find()
@@ -22,7 +21,6 @@ const updateFactionCommands = async () => {
             name: record.faction,
             value: record._id.toHexString(),
           });
-          console.log(record._id.toHexString());
         }
 
         const senddata = new SlashCommandBuilder()
@@ -68,7 +66,7 @@ const updateFactionCommands = async () => {
         refresh();
       });
   } catch (e) {
-    console.log(log.error + "[sendmessage/updateFactionCommands()] " + e);
+    console.log(log.error + "[sendmessage/find()] " + e);
   }
 };
 

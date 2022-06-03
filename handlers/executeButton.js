@@ -16,9 +16,15 @@ const executeButton = async (interaction) => {
       .find(query)
       .toArray()
       .then((result) => {
+        const embedMessage = require("../discord/embedMessage");
         const role = interaction.channel.guild.roles.cache.get(result[0].role);
-        console.log(role);
-        interaction.member.roles.add(role);
+        if (interaction.member.roles.has(role)) {
+          interaction.member.roles.remove(role);
+          embedMessage.reply(interaction, "#ffffff", "Role Deleted", "");
+        } else {
+          interaction.member.roles.add(role);
+          embedMessage.reply(interaction, "#ffffff", "Role Added", "");
+        }
       });
   } catch (e) {
     console.log(log.error + "[executeButton.js/executeButton()] " + e);

@@ -1,6 +1,6 @@
-const isAdmin = (userInteraction) => {
-  return userInteraction.member
-    .permissionsIn(userInteraction.channel)
+const isAdmin = (interaction) => {
+  return interaction.member
+    .permissionsIn(interaction.channel)
     .has("ADMINISTRATOR");
 };
 

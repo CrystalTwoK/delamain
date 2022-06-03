@@ -2,6 +2,9 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const MongoClient = require("mongodb").MongoClient;
 const dbClient = new MongoClient(db);
 
+const fs = require("fs");
+const embedMessage = require("../discord/embedMessage");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("createfaction")
@@ -70,8 +73,8 @@ module.exports = {
     try {
       //db
       await dbClient.connect();
-      const database = dbClient.db("GFC");
-      const fazioni = database.collection("db_fazioni");
+      const database = dbClient.db(`DELAMAIN_${interaction.guild.id}`);
+      const fazioni = database.collection("factions");
 
       //const
       const authorId = interaction.user.id;
@@ -86,33 +89,47 @@ module.exports = {
       const buttonemoji = interaction.options.get("emojibottone").value;
       const role = interaction.options.get("ruolo").value;
 
-      const info = {
-        authorId: authorId,
-        factionlabel: factionlabel,
-        faction: faction,
-        color: color,
-        title: title,
-        thumbnail: thumbnail,
-        description: description,
-        copertina: copertina,
-        buttonlabel: buttonlabel,
-        buttonemoji: buttonemoji,
-        role: role,
-      };
+      if (
+        (thumbnail.toString().startsWith("http") ||
+          thumbnail.toString().startsWith("https")) &&
+        (copertina.toString().startsWith("http") ||
+          copertina.toString().startsWith("https"))
+      ) {
+        const info = {
+          authorId: authorId,
+          factionlabel: factionlabel,
+          faction: faction,
+          color: color,
+          title: title,
+          thumbnail: thumbnail,
+          description: description,
+          copertina: copertina,
+          buttonlabel: buttonlabel,
+          buttonemoji: buttonemoji,
+          role: role,
+        };
 
-      await fazioni.insertOne(info).then(() => {
-        console.log(
-          log.db + "Faction created " + info.faction + `(${factionlabel})`
+        await fazioni.insertOne(info).then(() => {
+          console.log(
+            log.db + "Faction created " + info.faction + `(${factionlabel})`
+          );
+          console.log(info);
+          const {
+            updateFactionCommands,
+          } = require("../handlers/updateFactionCommands");
+
+          updateFactionCommands();
+          const embedMessage = require("../discord/embedMessage");
+          embedMessage.reply(interaction, "#ff0000", "Faction Created", "");
+        });
+      } else {
+        return embedMessage.reply(
+          interaction,
+          "#ffffff",
+          "L'icona e la copertina devono essere entrambi URL validi.",
+          "Prova a ricreare la Fazione con URL corretti."
         );
-        console.log(info);
-        const {
-          updateFactionCommands,
-        } = require("../handlers/updateFactionCommands");
-
-        updateFactionCommands();
-        const embedMessage = require("../discord/embedMessage");
-        embedMessage.reply(interaction, "#ff0000", "Faction Created", "");
-      });
+      }
     } catch (e) {
       console.log(log.error + "[createfaction.js/execute()] " + e);
     }

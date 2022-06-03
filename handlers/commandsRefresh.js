@@ -16,7 +16,7 @@ const refresh = async () => {
         log.system + "Successfully reloaded application (/) commands."
       );
     } catch (e) {
-      console.log(log.error + "[commandsRefresh] " + e);
+      console.log(log.error + "[commandsRefresh.js/refresh()] " + e);
     }
   })();
 };
