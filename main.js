@@ -48,7 +48,7 @@ client.on("ready", async () => {
     const { commandsInit } = require("./handlers/commandsInit");
     await commandsInit();
     MongoClient.connect(db, (err, db) => {
-      if (err) console.log(prefix.log + err);
+      if (err) console.log(log.error + err);
       console.log(log.db + "Database Connection Enstablished");
     });
   } else {
