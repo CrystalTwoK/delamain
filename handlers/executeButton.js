@@ -20,12 +20,13 @@ const executeButton = async (interaction) => {
         const role = interaction.channel.guild.roles.cache.get(result[0].role);
         if (interaction.member.roles.has(role)) {
           // interaction.member.roles.remove(role);
-          embedMessage.reply(
-            interaction,
-            "#ff0000",
-            "Hai già questo ruolo",
-            ""
-          );
+          // embedMessage.reply(
+          //   interaction,
+          //   "#ff0000",
+          //   "Hai già questo ruolo",
+          //   ""
+          // );
+          return;
         } else {
           interaction.member.roles.add(role);
           embedMessage.reply(interaction, "#00ff00", "✅", "");
