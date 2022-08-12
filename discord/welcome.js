@@ -7,8 +7,8 @@ const onJoin = async (member) => {
   ctx = canvas.getContext("2d");
 
   const images = [
-    "https://cdn.discordapp.com/attachments/1006719258392281141/1007583055390703616/afterlife_banner_welcome_discord_2.png",
-    "https://cdn.discordapp.com/attachments/1006719258392281141/1007583055701098566/afterlife_banner_welcome_discord_1.png",
+    "https://cdn.discordapp.com/attachments/1006719258392281141/1007598795057528892/afterlife_banner_welcome_discord_2.png",
+    "https://cdn.discordapp.com/attachments/1006719258392281141/1007598795401474108/afterlife_banner_welcome_discord_1.png",
   ];
 
   const selectedImage = Math.floor(Math.random() * images.length);
@@ -16,10 +16,10 @@ const onJoin = async (member) => {
   var background = await Canvas.loadImage(images[selectedImage]);
   ctx.drawImage(background, 0, 0, 1000, 500);
 
-  ctx.font = "bold 42px serif";
+  ctx.font = "bold 42px sans serif";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
-  ctx.fillText(member.user.tag.toUpperCase(), 512, 410);
+  ctx.fillText(member.user.username.toUpperCase(), 512, 410);
 
   ctx.beginPath();
   ctx.arc(512, 166, 119, 0, Math.PI * 2);
