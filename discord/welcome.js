@@ -16,7 +16,7 @@ const onJoin = async (member) => {
   var background = await Canvas.loadImage(images[selectedImage]);
   ctx.drawImage(background, 0, 0, 1000, 500);
 
-  ctx.font = "42px sans serif";
+  ctx.font = "bold 42px serif";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
   ctx.fillText(member.user.tag.toUpperCase(), 512, 410);
@@ -41,7 +41,7 @@ const onJoin = async (member) => {
   );
 
   client.channels.cache.get("1006732736213569598").send({
-    content: `Ciao <@${member.id}>, benvenuto in **${member.guild.name}!**\nVisita il canale <#1006841079242428426> per effettuare la verifica!`,
+    content: `Ciao <@${member.id}>, benvenuto in **${member.guild.name}!**\nVisita il canale <#1006841079242428426> per confermare la tua identità!`,
     files: [attachment],
   });
 };
