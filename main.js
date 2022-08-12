@@ -84,13 +84,13 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on("guildMemberRemove", (member) => {
-  // client.channels.cache.get("1006719258392281141").send({
-  //   content: `<@${member.id}> è uscito dal'**AFTERLIFE**!`,
-  // });
-
-  const { onLeave } = require("./discord/welcome");
+  client.channels.cache.get("1006719258392281141").send({
+    content: `<@${member.id}> è uscito dal'**AFTERLIFE**!`,
+  });
   console.log("UTENTE USCITO");
-  onLeave(member);
+
+  // const { onLeave } = require("./discord/welcome");
+  // onLeave(member);
 });
 
 // const randomImage = () => {
