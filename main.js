@@ -84,7 +84,7 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on("guildMemberRemove", (member) => {
-  client.channels.cache.get("1006719258392281141").send({
+  client.channels.cache.get("1007562652375068682").send({
     content: `<@${member.id}> è uscito dal'**AFTERLIFE**!`,
   });
   console.log("UTENTE USCITO");
