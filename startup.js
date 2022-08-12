@@ -1,7 +1,7 @@
 const ready = async () => {
   try {
     const signature = [
-      " ",
+      "                                                              ",
       "      88          88                              oo          ",
       ".d888b88 .d8888b. 88 .d8888b. 88d8b.d8b. .d8888b. dP 88d888b. ",
       "88'  `88 88ooood8 88 88'  `88 88'`88'`88 88'  `88 88 88'  `88 ",

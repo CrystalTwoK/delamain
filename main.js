@@ -72,14 +72,13 @@ client.on("interactionCreate", (interaction) => {
   }
 });
 
-const { onJoin, onLeave } = require("./discord/welcome");
-
 client.on("guildMemberAdd", (member) => {
   // const attachment = randomImage();
   // client.channels.cache.get("1006732736213569598").send({
   //   content: `Ciao <@${member.id}>, benvenuto all'**${member.guild.name}**!`,
   //   // files: [attachment],
   // });
+  const { onJoin } = require("./discord/welcome");
   console.log("UTENTE ENTRATO");
   onJoin(member);
 });
@@ -88,6 +87,8 @@ client.on("guildMemberRemove", (member) => {
   // client.channels.cache.get("1006719258392281141").send({
   //   content: `<@${member.id}> è uscito dal'**AFTERLIFE**!`,
   // });
+
+  const { onLeave } = require("./discord/welcome");
   console.log("UTENTE USCITO");
   onLeave(member);
 });
