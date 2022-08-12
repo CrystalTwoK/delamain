@@ -37,6 +37,4 @@ const executeButton = async (interaction) => {
   }
 };
 
-//r
-
 module.exports = { executeButton };

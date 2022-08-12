@@ -13,7 +13,7 @@ const onJoin = async (member) => {
 
   const selectedImage = Math.floor(Math.random() * images.length);
 
-  var background = await Canvas.loadImage(selectedImage);
+  var background = await Canvas.loadImage(images[selectedImage]);
   ctx.drawImage(background, 0, 0, 1000, 500);
 
   ctx.font = "42px sans serif";
