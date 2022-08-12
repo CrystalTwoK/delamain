@@ -48,7 +48,7 @@ client.on("ready", async () => {
     const { commandsInit } = require("./handlers/commandsInit");
     await commandsInit();
     MongoClient.connect(db, (err, db) => {
-      if (err) console.log(log.error + err);
+      if (err) console.log(prefix.log + err);
       console.log(log.db + "Database Connection Enstablished");
     });
   } else {
@@ -71,3 +71,38 @@ client.on("interactionCreate", (interaction) => {
     }
   }
 });
+
+const { onJoin, onLeave } = require("./discord/welcome");
+
+client.on("guildMemberAdd", (member) => {
+  // const attachment = randomImage();
+  // client.channels.cache.get("1006732736213569598").send({
+  //   content: `Ciao <@${member.id}>, benvenuto all'**${member.guild.name}**!`,
+  //   // files: [attachment],
+  // });
+  console.log("UTENTE ENTRATO");
+  onJoin(member);
+});
+
+client.on("guildMemberRemove", (member) => {
+  // client.channels.cache.get("1006719258392281141").send({
+  //   content: `<@${member.id}> è uscito dal'**AFTERLIFE**!`,
+  // });
+  console.log("UTENTE USCITO");
+  onLeave(member);
+});
+
+// const randomImage = () => {
+//   const images = [
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996260357213536266/ezgif.com-gif-maker_3.gif",
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996261524177956894/ezgif.com-gif-maker_4.gif",
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996261976504283258/ezgif.com-gif-maker_5.gif",
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996262234596589618/ezgif.com-gif-maker_6.gif",
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996262528097206333/ezgif.com-gif-maker_7.gif",
+//     "https://cdn.discordapp.com/attachments/880553095816437810/996262835078303774/ezgif.com-gif-maker_8.gif",
+//   ];
+
+//   const selected = Math.floor(Math.random() * images.length);
+
+//   return images[selected];
+// };
